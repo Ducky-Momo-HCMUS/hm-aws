@@ -27,7 +27,9 @@ services:
       - CORE_PORT=${CORE_PORT}
       - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
   nginx:
-    image: nginx:stable-alpine
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     restart: always
     ports:
       - 80:80
