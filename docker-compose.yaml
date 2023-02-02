@@ -1,31 +1,31 @@
 version: "3"
 
 services:
-  account:
-    image: ${DOCKER_REGISTRY}/hm-account
-    hostname: account
-    ports:
-      - "3010-3011:3010-3011"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
-      - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
-      - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
-      - ACCOUNT_PORT=${ACCOUNT_PORT}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-  core:
-    image: ${DOCKER_REGISTRY}/hm-core
-    hostname: core
-    ports:
-      - "3020-3021:3020-3021"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-      - CORE_PORT=${CORE_PORT}
-      - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
+  # account:
+  #   image: ${DOCKER_REGISTRY}/hm-account
+  #   hostname: account
+  #   ports:
+  #     - "3010-3011:3010-3011"
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
+  #     - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
+  #     - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
+  #     - ACCOUNT_PORT=${ACCOUNT_PORT}
+  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+  # core:
+  #   image: ${DOCKER_REGISTRY}/hm-core
+  #   hostname: core
+  #   ports:
+  #     - "3020-3021:3020-3021"
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
+  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+  #     - CORE_PORT=${CORE_PORT}
+  #     - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
   nginx:
     image: nginx:stable-alpine
     restart: always
