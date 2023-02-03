@@ -31,7 +31,6 @@ services:
     build:
       context: ./certbot
       dockerfile: Dockerfile
-    restart: unless-stopped
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
@@ -51,4 +50,3 @@ services:
     depends_on:
       - account
       - core
-      - certbot
