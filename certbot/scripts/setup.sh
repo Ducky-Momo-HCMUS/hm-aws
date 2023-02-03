@@ -1,6 +1,7 @@
 #!/bin/sh
 
-if [ -n "${DOMAIN+1}" ]; then
+if [ -n "${DOMAIN+1}" ]
+then
     echo "Missing DOMAIN environment variable" 1>&2
     exit 1
 fi
