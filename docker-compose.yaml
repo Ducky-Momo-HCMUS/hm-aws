@@ -28,7 +28,9 @@ services:
       - CORE_PORT=${CORE_PORT}
       - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
   certbot:
-    image: certbot/certbot:latest
+    build:
+      context: ./certbot
+      dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
