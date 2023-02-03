@@ -31,7 +31,6 @@ services:
     build:
       context: ./certbot
       dockerfile: Dockerfile
-    entrypoint: ["/bin/sh", "/scripts/setup.sh"]
     restart: unless-stopped
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
