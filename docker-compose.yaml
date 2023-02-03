@@ -25,12 +25,12 @@ services:
       - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
       - CORE_PORT=${CORE_PORT}
       - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
-  certbot:
-    image: certbot/certbot:latest
-    restart: unless-stopped
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
   nginx:
     build:
       context: ./nginx
