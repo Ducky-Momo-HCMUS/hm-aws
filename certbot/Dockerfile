@@ -1,7 +1,7 @@
-FROM certbot/certbot:latest
+FROM certbot/certbot:v1.29.0
 
 RUN apk add --no-cache bash
-COPY scripts /scripts
-RUN chmod +x /scripts/setup.sh
+COPY scripts/setup.sh /opt/
+RUN chmod +x /opt/setup.sh
 
-ENTRYPOINT ["/scripts/setup.sh"]
+ENTRYPOINT ["/opt/setup.sh"]
