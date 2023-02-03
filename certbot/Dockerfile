@@ -4,4 +4,4 @@ COPY scripts /scripts
 RUN chmod +x /scripts/setup.sh
 
 # https://stackoverflow.com/a/56791772/12405558
-ENTRYPOINT [ "/scripts/setup.sh" ]
+ENTRYPOINT ["sh", "/scripts/setup.sh"]
