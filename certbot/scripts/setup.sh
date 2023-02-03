@@ -4,7 +4,7 @@ set -e
 
 trap exit INT TERM
 
-if [ -z "$DOMAINS" ]; then
+if [[ -z "$DOMAINS" ]]; then
   echo "DOMAINS environment variable is not set"
   exit 1;
 fi
