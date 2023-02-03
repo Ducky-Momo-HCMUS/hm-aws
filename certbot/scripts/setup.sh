@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ -z "$DOMAIN" ]]; then
     echo "Missing DOMAIN environment variable" 1>&2
