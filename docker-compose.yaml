@@ -32,6 +32,7 @@ services:
       context: ./certbot
       dockerfile: Dockerfile
     volumes:
+      # Allow certbot to write to shared volume
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
     environment:
@@ -45,8 +46,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /var/log/nginx:/var/log/nginx
+      # Allow nginx to read generated files from certbot in shared volume
       - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      # For Elastic Beanstalk logging
+      - /var/log/nginx:/var/log/nginx
     depends_on:
       - account
       - core
