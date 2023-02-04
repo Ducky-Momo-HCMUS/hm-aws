@@ -2,10 +2,13 @@ FROM nginx:stable-alpine
 
 EXPOSE 80
 
-# Delete the default welcome to nginx page.
-RUN rm /usr/share/nginx/html/*
-
 COPY configs /etc/nginx
+COPY scripts/setup.sh /opt/
 
-# Start nginx in the foreground to play nicely with Docker.
-CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x /opt/setup.sh \
+    && apk add --no-cache bash certbot certbot-nginx \
+    # Delete the default welcome to nginx page.
+    && rm /usr/share/nginx/html/*
+
+
+ENTRYPOINT ["/opt/setup.sh"]
