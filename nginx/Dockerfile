@@ -10,5 +10,4 @@ RUN chmod +x /opt/setup.sh \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
-
 ENTRYPOINT ["/opt/setup.sh"]

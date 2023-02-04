@@ -17,6 +17,7 @@ start_nginx() {
 }
 
 if [[ -f "$fullchain_path" && -f "$privkey_path" ]]; then
+  echo "Certificates not found. Executing certbot --nginx"
   certbot --nginx --non-interactive --standalone --agree-tos --register-unsafely-without-email --domains "${DOMAIN}"
   start_nginx
 else
