@@ -3,7 +3,7 @@ FROM nginx:stable-alpine
 EXPOSE 80
 
 COPY configs /etc/nginx
-COPY scripts/setup.sh /opt/nginx
+COPY scripts/setup.sh /opt/nginx/
 # ZeroSSL domain verification
 COPY zerossl /var/www/zerossl
 
