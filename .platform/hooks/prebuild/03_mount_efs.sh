@@ -32,7 +32,7 @@
 
 EFS_MOUNT_DIR="/efs"
 EFS_FILE_SYSTEM_ID=$(/opt/elasticbeanstalk/bin/get-config environment -k EFS_FILE_SYSTEM_ID)
-# EFS_MOUNT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EFS_MOUNT_DIR)
+# EFS_MOUNT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k MOUNT_DIRECTORY)
 # EFS_FILE_SYSTEM_ID=$(/opt/elasticbeanstalk/bin/get-config environment -k FILE_SYSTEM_ID)
 
 echo "Mounting EFS filesystem ${EFS_FILE_SYSTEM_ID} to directory ${EFS_MOUNT_DIR} ..."
