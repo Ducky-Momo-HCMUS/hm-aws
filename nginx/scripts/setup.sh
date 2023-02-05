@@ -4,20 +4,28 @@ set -e
 
 trap exit INT TERM
 
-if [[ -z "$DOMAIN" ]]; then
-  echo "DOMAIN environment variable is not set"
+if [[ -z "$ZEROSSL_ID" ]]; then
+  echo "ZEROSSL_ID environment variable is not set"
   exit 1
 fi
 
-echo "Setting up certbot"
+if [[ -z "$ZEROSSL_ACCESS_KEY" ]]; then
+  echo "ZEROSSL_ACCESS_KEY environment variable is not set"
+  exit 1
+fi
 
-fullchain_path=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
-privkey_path=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+unzip_zerossl() {
+  api=https://api.zerossl.com/certificates/"$ZEROSSL_ID"/download?access_key="$ZEROSSL_ACCESS_KEY"
+  # Download and unzip certificates
+  cd /opt/nginx                        && \
+  curl --show-error "$api" > certs.zip && \
+  unzip certs.zip                      && \
+  rm certs.zip
+}
 
 echo "$fullchain_path"
 echo "$privkey_path"
 
-certbot --nginx --non-interactive --agree-tos --register-unsafely-without-email --domains "${DOMAIN}"
 nginx -g "daemon off;"
 
 # if [[ -f "$fullchain_path" && -f "$privkey_path" ]]; then

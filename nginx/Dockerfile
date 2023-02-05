@@ -3,11 +3,12 @@ FROM nginx:stable-alpine
 EXPOSE 80
 
 COPY configs /etc/nginx
-COPY scripts/setup.sh /opt/
+COPY scripts/setup.sh /opt/nginx
+# ZeroSSL domain verification
 COPY zerossl /var/www/zerossl
 
-RUN chmod +x /opt/setup.sh \
-    && apk add --no-cache bash certbot certbot-nginx \
+RUN chmod +x /opt/nginx/setup.sh \
+    && apk add --no-cache bash \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
