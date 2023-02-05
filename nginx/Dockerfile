@@ -11,4 +11,7 @@ RUN chmod +x /opt/setup.sh \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
-ENTRYPOINT ["/opt/setup.sh"]
+# Start nginx in the foreground to play nicely with Docker.
+CMD ["nginx", "-g", "daemon off;"]
+
+# ENTRYPOINT ["/opt/setup.sh"]
