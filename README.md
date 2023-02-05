@@ -35,16 +35,28 @@ Another alternative is ZeroSSL.
 
 ## Configuration
 
-Important checklist for EB, based on AWS console. Options not listed here are set as default or not important to the application.
+Important checklist for EB, based on [AWS console](https://ap-southeast-1.console.aws.amazon.com/elasticbeanstalk/home). Options not listed here are set as default or are not important to the application.
 
 - Software
   - Container options
     - Proxy server: None (NGINX is not available in docker compose environment)
-  - Environment properties: Copy and paste your `.env` file here
+  - Environment properties: Copy and paste your `.env` file here. Additional variables:
+    - DOCKER_REGISTRY
+    - DOMAIN
+    - EFS_FILE_SYSTEM_ID
 - Instances
   - EC2 security groups: Add EFS security group here.
 - Security
   - Virtual machine permissions
-    - EC2 key pair: For debug purposes. Allow you to tunnel to EC2 instance.
+    - EC2 key pair: For debug purposes. Allow you to tunnel to EC2 instance
 - Network: Add your prefered "Instance subnets" and "Database subnets"
 - Database: TODO
+
+## Secrets
+
+Secret are store as environment variables in EB configuration or files on EFS such as SSL certificates. Here are required env and files:
+
+Environment variables:
+- `DOCKER_REGISTRY`
+- `DOMAIN`
+- `EFS_FILE_SYSTEM_ID`
