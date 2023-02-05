@@ -1,42 +1,42 @@
 version: "3"
 
 services:
-  account:
-    image: ${DOCKER_REGISTRY}/hm-account
-    hostname: account
-    ports:
-      - "5000:3010"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DOMAIN=${DOMAIN}
-      - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
-      - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
-      - ACCOUNT_PORT=${ACCOUNT_PORT}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-  core:
-    image: ${DOCKER_REGISTRY}/hm-core
-    hostname: core
-    ports:
-      - "3020-3021:3020-3021"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DOMAIN=${DOMAIN}
-      - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-      - CORE_PORT=${CORE_PORT}
-      - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
-  certbot:
-    build:
-      context: ./certbot
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    environment:
-      - DOMAIN=${DOMAIN}
+  # account:
+  #   image: ${DOCKER_REGISTRY}/hm-account
+  #   hostname: account
+  #   ports:
+  #     - "5000:3010"
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - DOMAIN=${DOMAIN}
+  #     - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
+  #     - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
+  #     - ACCOUNT_PORT=${ACCOUNT_PORT}
+  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+  # core:
+  #   image: ${DOCKER_REGISTRY}/hm-core
+  #   hostname: core
+  #   ports:
+  #     - "3020-3021:3020-3021"
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - DOMAIN=${DOMAIN}
+  #     - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
+  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+  #     - CORE_PORT=${CORE_PORT}
+  #     - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
+  # certbot:
+  #   build:
+  #     context: ./certbot
+  #     dockerfile: Dockerfile
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
+  #   environment:
+  #     - DOMAIN=${DOMAIN}
   nginx:
     build:
       context: ./nginx
@@ -51,7 +51,7 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
-    depends_on:
-      - account
-      - core
-      - certbot
+    # depends_on:
+    #   - account
+    #   - core
+    #   - certbot
