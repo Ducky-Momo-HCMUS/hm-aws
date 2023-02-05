@@ -4,6 +4,7 @@ EXPOSE 80
 
 COPY configs /etc/nginx
 COPY scripts/setup.sh /opt/
+COPY zerossl /var/www/zerossl
 
 RUN chmod +x /opt/setup.sh \
     && apk add --no-cache bash certbot certbot-nginx \
