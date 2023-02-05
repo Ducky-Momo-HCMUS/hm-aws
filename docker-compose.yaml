@@ -27,16 +27,6 @@ services:
   #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
   #     - CORE_PORT=${CORE_PORT}
   #     - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
-  # certbot:
-  #   build:
-  #     context: ./certbot
-  #     dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./certbot/www/:/var/www/certbot/:rw
-  #     - ./certbot/conf/:/etc/letsencrypt/:rw
-  #   environment:
-  #     - DOMAIN=${DOMAIN}
   nginx:
     build:
       context: ./nginx
@@ -46,12 +36,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      # Allow nginx to read generated files from certbot in shared volume
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
     # depends_on:
     #   - account
     #   - core
-    #   - certbot
