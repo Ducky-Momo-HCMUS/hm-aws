@@ -23,6 +23,9 @@ unzip_zerossl() {
   rm certs.zip
 }
 
+fullchain_path=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
+privkey_path=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+
 echo "$fullchain_path"
 echo "$privkey_path"
 
