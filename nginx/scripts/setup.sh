@@ -9,6 +9,15 @@ if [[ -z "$DOMAIN" ]]; then
   exit 1
 fi
 
+check_env() {
+  if [[ -z "${!$1}" ]]; then
+    echo "$1 is not set"
+    exit 1
+  fi
+}
+
+check_env ABC
+
 fullchain_path="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
 privkey_path="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
 

@@ -26,13 +26,14 @@ cp_dir_if_target_is_empty() {
   echo "Finished copying $source/ to $target/"
 }
 
+# See https://stackoverflow.com/q/18135451 for syntax like ${DOMAIN}
 # Copy certificates from EFS to a backup directory
-cp_dir_if_target_is_empty "${EFS_BASE_SSL_DIR}/${DOMAIN}" "${EC2_SSL_DIR}"
+cp_dir_if_target_is_empty "${EFS_BASE_SSL_DIR}/${DOMAIN}" "$EC2_SSL_DIR"
 # Now we should have the following if we use certbot:
 # - ${EC2_SSL_DIR}/live/...
 # - ${EC2_SSL_DIR}/archive/...
 # - ${EC2_SSL_DIR}/keys/...
 
 # Copy certificates to certbot directories
-cp_dir_if_target_is_empty "${EC2_SSL_DIR}" "${EC2_BASE_CERTBOT_DIR}/${DOMAIN}"
+cp_dir_if_target_is_empty "$EC2_SSL_DIR" "${EC2_BASE_CERTBOT_DIR}/${DOMAIN}"
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
