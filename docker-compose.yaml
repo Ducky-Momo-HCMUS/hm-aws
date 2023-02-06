@@ -1,19 +1,19 @@
 version: "3"
 
 services:
-  # account:
-  #   image: ${DOCKER_REGISTRY}/hm-account
-  #   hostname: account
-  #   ports:
-  #     - "5000:3010"
-  #   environment:
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - DOMAIN=${DOMAIN}
-  #     - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
-  #     - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
-  #     - ACCOUNT_PORT=${ACCOUNT_PORT}
-  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+  account:
+    image: ${DOCKER_REGISTRY}/hm-account
+    hostname: account
+    ports:
+      - "5000:3010"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - DOMAIN=${DOMAIN}
+      - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
+      - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
+      - ACCOUNT_PORT=${ACCOUNT_PORT}
+      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
   # core:
   #   image: ${DOCKER_REGISTRY}/hm-core
   #   hostname: core
