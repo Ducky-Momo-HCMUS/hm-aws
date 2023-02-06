@@ -13,8 +13,9 @@ cp_dir_if_target_is_empty() {
     >&2 echo "ERROR: $source and $target must be a directory"
     exit 1
   fi
-  # Create directory if not exist
+  # Create directories if not exist
   mkdir -p "$source"
+  mkdir -p "$target"
 
   if [ -z "$(ls -A "$target")" ]; then
     echo "$target is empty, copying from $source"
@@ -26,4 +27,4 @@ cp_dir_if_target_is_empty() {
 
 # Sync certbot certificates
 cp_dir_if_target_is_empty "${EFS_SSL_DIR}" "${EC2_SSL_DIR}"
-cp_dir_if_target_is_empty "${EC2_SSL_DIR}" "${EC2_SSL_BACKUP_DIR}"
+# cp_dir_if_target_is_empty "${EC2_SSL_DIR}" "${EC2_SSL_BACKUP_DIR}"
