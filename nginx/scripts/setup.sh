@@ -40,6 +40,11 @@ if [ -s "$certbot_fullchain_path" ] && cmp --silent -- "$certbot_fullchain_path"
    [ -s "$certbot_privkey_path" ] && cmp --silent -- "$certbot_privkey_path" "$privkey_path" 
 then
   echo "Change found in certificates, syncing to $EFS_BASE_SSL_DIR"
+  rsync -a --delete "$EC2_BASE_CERTBOT_DIR/live/$DOMAIN" "$EC2_SSL_DIR/live"
+  rsync -a --delete "$EC2_BASE_CERTBOT_DIR/archive/$DOMAIN" "$EC2_SSL_DIR/archive"
+  rsync -a --delete "$EC2_BASE_CERTBOT_DIR/keys/$DOMAIN" "$EC2_SSL_DIR/keys"
+
+  rsync -a --delete "$EC2_SSL_DIR" "$EFS_BASE_SSL_DIR/$DOMAIN"
 else
   echo "No change found, do nothing"
 fi
