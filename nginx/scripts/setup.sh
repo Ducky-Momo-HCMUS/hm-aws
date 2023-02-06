@@ -29,11 +29,11 @@ ssl_dir="$EC2_SSL_DIR/live"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 
-# certbot --nginx \
-#         --non-interactive \
-#         --agree-tos \
-#         --register-unsafely-without-email \
-#         --domains "$DOMAIN"
+certbot --nginx \
+        --non-interactive \
+        --agree-tos \
+        --register-unsafely-without-email \
+        --domains "$DOMAIN"
 
 # certbot renewal -> changes in files -> copy all back to EFS
 if [ -s "$certbot_fullchain_path" ] && cmp --silent -- "$certbot_fullchain_path" "$fullchain_path" || \ 
