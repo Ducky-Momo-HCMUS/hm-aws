@@ -49,7 +49,7 @@ certbot --nginx \
 #   echo "No change found, do nothing"
 # fi
 
-nginx -g "daemon off;"
+# nginx -g "daemon off;"
 
 # if [[ -f "$fullchain_path" && -f "$privkey_path" ]]; then
 #   echo "Certificates not found. Executing certbot --nginx"
