@@ -36,8 +36,9 @@ privkey_path="$ssl_dir/privkey.pem"
 #         --domains "$DOMAIN"
 
 # certbot renewal -> changes in files -> copy all back to EFS
-if [ -s "$certbot_fullchain_path" ] && cmp --silent -- "$certbot_fullchain_path" "$fullchain_path" \ 
-|| [ -s "$certbot_privkey_path" ] && cmp --silent -- "$certbot_privkey_path" "$privkey_path"; then
+if [ -s "$certbot_fullchain_path" ] && cmp --silent -- "$certbot_fullchain_path" "$fullchain_path" || \ 
+   [ -s "$certbot_privkey_path" ] && cmp --silent -- "$certbot_privkey_path" "$privkey_path" 
+then
   echo "Change found in certificates, syncing to $EFS_BASE_SSL_DIR"
 else
   echo "No change found, do nothing"
