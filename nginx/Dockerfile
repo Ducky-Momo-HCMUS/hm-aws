@@ -6,11 +6,11 @@ COPY configs /etc/nginx
 COPY scripts/setup.sh /opt/nginx/
 
 RUN chmod +x /opt/nginx/setup.sh \
-    && apk add --no-cache bash \
+    && apk add --no-cache bash certbot certbot-nginx \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
-# Start nginx in the foreground to play nicely with Docker.
-CMD ["nginx", "-g", "daemon off;"]
+# # Start nginx in the foreground to play nicely with Docker.
+# CMD ["nginx", "-g", "daemon off;"]
 
-# ENTRYPOINT ["/opt/setup.sh"]
+ENTRYPOINT ["/opt/setup.sh"]

@@ -4,12 +4,13 @@ set -e
 
 trap exit INT TERM
 
-fullchain_path=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
-privkey_path=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+fullchain_path="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
+privkey_path="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
 
 echo "$fullchain_path"
 echo "$privkey_path"
 
+certbot --nginx --non-interactive --agree-tos --register-unsafely-without-email --domains "$DOMAIN"
 nginx -g "daemon off;"
 
 # if [[ -f "$fullchain_path" && -f "$privkey_path" ]]; then
