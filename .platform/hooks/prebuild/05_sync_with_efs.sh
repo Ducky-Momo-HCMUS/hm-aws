@@ -23,8 +23,9 @@ cp_dir_if_target_is_empty() {
   else
     echo "$target is not empty, do nothing"
   fi
+  echo "Done"
 }
 
 # Sync certbot certificates
 cp_dir_if_target_is_empty "${EFS_SSL_DIR}" "${EC2_SSL_DIR}"
-# cp_dir_if_target_is_empty "${EC2_SSL_DIR}" "${EC2_SSL_BACKUP_DIR}"
+cp_dir_if_target_is_empty "${EC2_SSL_DIR}" "${EC2_SSL_BACKUP_DIR}"
