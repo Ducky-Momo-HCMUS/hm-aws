@@ -4,25 +4,6 @@ set -e
 
 trap exit INT TERM
 
-if [[ -z "$ZEROSSL_ID" ]]; then
-  echo "ZEROSSL_ID environment variable is not set"
-  exit 1
-fi
-
-if [[ -z "$ZEROSSL_ACCESS_KEY" ]]; then
-  echo "ZEROSSL_ACCESS_KEY environment variable is not set"
-  exit 1
-fi
-
-unzip_zerossl() {
-  api=https://api.zerossl.com/certificates/"$ZEROSSL_ID"/download?access_key="$ZEROSSL_ACCESS_KEY"
-  # Download and unzip certificates
-  cd /opt/nginx                        && \
-  curl --show-error "$api" > certs.zip && \
-  unzip certs.zip                      && \
-  rm certs.zip
-}
-
 fullchain_path=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
 privkey_path=/etc/letsencrypt/live/$DOMAIN/privkey.pem
 

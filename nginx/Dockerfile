@@ -4,8 +4,6 @@ EXPOSE 80
 
 COPY configs /etc/nginx
 COPY scripts/setup.sh /opt/nginx/
-# ZeroSSL domain verification
-COPY zerossl /var/www/zerossl
 
 RUN chmod +x /opt/nginx/setup.sh \
     && apk add --no-cache bash \
