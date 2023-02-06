@@ -2,7 +2,7 @@
 
 ### Elastic Beanstalk with Docker Compose
 
-The Docker platform (Amazon Linux 2) with Docker Compose doesn't setup NGINX (see [here](<(https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-specific.html#command-options-docker)>)) so we have to setup our own, either:
+The Docker platform (Amazon Linux 2) with Docker Compose doesn't setup NGINX (see [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-specific.html#command-options-docker)) so we have to setup our own, either:
 
 1. Config and enable NGINX manually on host machine. We can also install [certbot](https://certbot.eff.org) for automatic SSL configuration.
 2. Use [NGINX image](https://hub.docker.com/_/nginx). **_(current approach)_**
@@ -39,7 +39,7 @@ Important checklist for EB, based on [AWS console](https://ap-southeast-1.consol
 
 - Software
   - Container options
-    - Proxy server: None (NGINX is not available in docker compose environment)
+    - Proxy server: None (NGINX is not available in docker compose environment, so "Nginx" option is useless)
   - Environment properties: Copy and paste your `.env` file here. Additional variables:
     - DOCKER_REGISTRY
     - DOMAIN
@@ -57,6 +57,7 @@ Important checklist for EB, based on [AWS console](https://ap-southeast-1.consol
 Secret are store as environment variables in EB configuration or files on EFS such as SSL certificates. Here are required env and files:
 
 Environment variables:
+
 - `DOCKER_REGISTRY`
 - `DOMAIN`
 - `EFS_FILE_SYSTEM_ID`
