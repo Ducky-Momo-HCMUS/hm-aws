@@ -1,14 +1,9 @@
 #!/bin/bash
 
-export_env() {
-    command="export '$1'"
-    echo "$command" >> ~/.bashrc
-}
+echo 'export EFS_ID="fs-0fd3fd850a9d21c1a"' >> ~/.bashrc
+echo 'export EFS_MOUNT_DIR="/efs"' >> ~/.bashrc
+echo 'export EFS_DOMAIN_SSL_DIR="${EFS_MOUNT_DIR}/ssl/${DOMAIN}"' >> ~/.bashrc
 
-export_env 'EFS_ID="fs-0fd3fd850a9d21c1a"'
-export_env 'EFS_MOUNT_DIR="/efs"'
-export_env 'EFS_DOMAIN_SSL_DIR="${EFS_MOUNT_DIR}/ssl/${DOMAIN}"'
-
-export_env 'EC2_SSL_DIR="/etc/ssl/letsencrypt"'
+echo 'export EC2_SSL_DIR="/etc/ssl/letsencrypt"' >> ~/.bashrc
 
 cat ~/.bashrc
