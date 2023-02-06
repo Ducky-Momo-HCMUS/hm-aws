@@ -11,6 +11,6 @@ cp_dir() {
   fi
 }
 
-cp_dir EFS_SSL_DIR
+cp_dir "${EFS_SSL_DIR}"
 
 # Sync certbot certificates
