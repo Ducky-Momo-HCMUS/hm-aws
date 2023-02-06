@@ -13,4 +13,4 @@ RUN chmod +x /opt/nginx/setup.sh \
 # # Start nginx in the foreground to play nicely with Docker.
 # CMD ["nginx", "-g", "daemon off;"]
 
-ENTRYPOINT ["/opt/setup.sh"]
+ENTRYPOINT ["/opt/nginx/setup.sh"]
