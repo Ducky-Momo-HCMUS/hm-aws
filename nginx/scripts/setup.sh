@@ -9,8 +9,7 @@ get_env() {
     echo "$1 is not set"
     exit 1
   fi
-  env_name="$1"
-  echo "${!env_name}"
+  echo "${!1}"
 }
 
 DOMAIN=$(get_env DOMAIN)
