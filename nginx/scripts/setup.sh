@@ -35,6 +35,8 @@ certbot --nginx \
         --register-unsafely-without-email \
         --domains "$DOMAIN"
 
+sleep 1h
+
 # certbot renewal -> changes in files -> copy all back to EFS
 # if [ -s "$certbot_fullchain_path" ] && cmp -s -- "$certbot_fullchain_path" "$fullchain_path" || \ 
 #    [ -s "$certbot_privkey_path" ] && cmp -s -- "$certbot_privkey_path" "$privkey_path" 
