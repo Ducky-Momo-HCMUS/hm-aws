@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY}/hm-account
     hostname: account
     ports:
-      - "5000:3010"
+      - "3010-3011:3010-3011"
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - DOMAIN=${DOMAIN}
@@ -36,12 +36,16 @@ services:
       - 80:80
       - 443:443
     volumes:
+      - ${EC2_BASE_CERTBOT_DIR}:${EC2_BASE_CERTBOT_DIR}
+      - ${EC2_SSL_DIR}:${EC2_SSL_DIR}
+      - ${EFS_BASE_SSL_DIR}:${EFS_BASE_SSL_DIR}
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
     environment:
       - DOMAIN=${DOMAIN}
       - EC2_BASE_CERTBOT_DIR=${EC2_BASE_CERTBOT_DIR}
+      - EC2_SSL_DIR=${EC2_SSL_DIR}
       - EFS_BASE_SSL_DIR=${EFS_BASE_SSL_DIR}
-    # depends_on:
-    #   - account
+    depends_on:
+      - account
     #   - core
