@@ -35,5 +35,7 @@ cp_dir_if_target_is_empty "${EFS_BASE_SSL_DIR}/${DOMAIN}" "$EC2_SSL_DIR"
 # - ${EC2_SSL_DIR}/keys/...
 
 # Copy certificates to certbot directories
-cp_dir_if_target_is_empty "$EC2_SSL_DIR" "${EC2_BASE_CERTBOT_DIR}/${DOMAIN}"
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
+cp_dir_if_target_is_empty "${EC2_SSL_DIR}/live" "${EC2_BASE_CERTBOT_DIR}/live/${DOMAIN}"
+cp_dir_if_target_is_empty "${EC2_SSL_DIR}/archive" "${EC2_BASE_CERTBOT_DIR}/archive/${DOMAIN}"
+cp_dir_if_target_is_empty "${EC2_SSL_DIR}/keys" "${EC2_BASE_CERTBOT_DIR}/keys/${DOMAIN}"
