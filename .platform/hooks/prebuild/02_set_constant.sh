@@ -1,7 +1,8 @@
 #!/bin/bash
 
 export_env() {
-    echo 'export $1' >> ~/.bashrc
+    command='export $1'
+    echo '$command' >> ~/.bashrc
 }
 
 export_env 'EFS_ID="fs-0fd3fd850a9d21c1a"'
