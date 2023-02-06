@@ -4,15 +4,15 @@ set -e
 
 trap exit INT TERM
 
-get_env() {
+check_env() {
   if [[ -z "$1" ]]; then
     echo "$1 is not set"
     exit 1
   fi
-  echo "${!1}"
 }
 
-DOMAIN=$(get_env DOMAIN)
+check_env DOMAIN
+check_env SOME_ENV_VAR
 
 fullchain_path="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
 privkey_path="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
