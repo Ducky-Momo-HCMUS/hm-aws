@@ -38,7 +38,7 @@ if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
   openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
     -subj "/CN=localhost" \
     -keyout "$privkey_path" \
-    -out "$fullchain_path"
+    -out "$fullchain_path" 1> /dev/null
 fi
 
 # certbot renewal -> changes in files -> copy all back to EFS
