@@ -39,7 +39,7 @@ services:
       - ${EC2_CERTBOT_DIR}:${EC2_CERTBOT_DIR}
       - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
-      - /etc/nginx:/etc/nginx
+      # - /etc/nginx:/etc/nginx
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
       - /var/log/letsencrypt:/var/log/letsencrypt
