@@ -31,14 +31,14 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    # restart: always
+    restart: always
     ports:
       - 80:80
       - 443:443
     volumes:
       - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
-      - /etc/certbot/www:/var/www/certbot:ro
+      - ./certbot/www:/var/www/certbot:ro
       # Need "rw" to create dummy certificates
       - /etc/certbot/conf:/etc/letsencrypt:rw
       # For hardcoded path in nginx.conf
@@ -60,7 +60,7 @@ services:
       context: ./certbot
       dockerfile: Dockerfile
     volumes:
-      - /etc/certbot/www:/var/www/certbot:rw
+      - ./certbot/www:/var/www/certbot:rw
       - /etc/certbot/conf:/etc/letsencrypt:rw
     environment:
       - DOMAIN=${DOMAIN}
