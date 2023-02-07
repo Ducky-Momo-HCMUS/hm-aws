@@ -3,7 +3,7 @@ FROM nginx:stable-alpine
 EXPOSE 80
 
 COPY configs /etc/nginx
-COPY ssl-dhparams.pem /etc/nginx/cerbot/
+COPY ssl-dhparams.pem /etc/ssl/certbot/
 COPY scripts/setup.sh /opt/nginx/
 
 RUN chmod +x /opt/nginx/setup.sh \
