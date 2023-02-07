@@ -38,7 +38,7 @@ services:
     volumes:
       - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
-      - ./certbot/www:/var/www/certbot:ro
+      - /etc/certbot/www:/var/www/certbot:ro
       # Need "rw" to create dummy certificates
       - /etc/certbot/conf:/etc/letsencrypt:rw
       # For hardcoded path in nginx.conf

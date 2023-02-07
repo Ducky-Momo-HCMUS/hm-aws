@@ -11,3 +11,4 @@ done;
 
 echo "Certbot has exited. Reloading nginx"
 docker exec $nginx_name nginx -s reload
+echo "Finished reloading nginx"
