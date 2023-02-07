@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k DOMAIN)
-EFS_BASE_SSL_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EFS_BASE_SSL_DIR)
-EC2_BASE_CERTBOT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EC2_BASE_CERTBOT_DIR)
+EFS_BASE_CERTBOT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EFS_BASE_CERTBOT_DIR)
+EC2_CERTBOT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EC2_CERTBOT_DIR)
 
 # Copy directory from $1 (source) to $2 (target) if target is empty
 cp_dir_if_target_is_empty() {
@@ -28,14 +28,12 @@ cp_dir_if_target_is_empty() {
 
 # See https://stackoverflow.com/q/18135451 for syntax like ${DOMAIN}
 # Copy certificates from EFS to a backup directory
-cp_dir_if_target_is_empty "${EFS_BASE_SSL_DIR}/${DOMAIN}" "$EC2_SSL_DIR"
+cp_dir_if_target_is_empty "$EFS_BASE_CERTBOT_DIR/$DOMAIN" "$EC2_CERTBOT_BACKUP_DIR"
 # Now we should have the following if we use certbot:
-# - ${EC2_SSL_DIR}/live/...
-# - ${EC2_SSL_DIR}/archive/...
-# - ${EC2_SSL_DIR}/keys/...
+# - ${EC2_CERTBOT_BACKUP_DIR}/live/...
+# - ${EC2_CERTBOT_BACKUP_DIR}/archive/...
+# - ... other certbot configurations
 
-# Copy certificates to certbot directories
+# Sync certificates to certbot directories
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
-cp_dir_if_target_is_empty "${EC2_SSL_DIR}/live" "${EC2_BASE_CERTBOT_DIR}/live/${DOMAIN}"
-cp_dir_if_target_is_empty "${EC2_SSL_DIR}/archive" "${EC2_BASE_CERTBOT_DIR}/archive/${DOMAIN}"
-cp_dir_if_target_is_empty "${EC2_SSL_DIR}/keys" "${EC2_BASE_CERTBOT_DIR}/keys/${DOMAIN}"
+rsync -a "$EC2_CERTBOT_BACKUP_DIR/" "$EC2_CERTBOT_DIR"
