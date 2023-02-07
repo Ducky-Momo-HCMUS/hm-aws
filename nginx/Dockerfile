@@ -4,6 +4,7 @@ EXPOSE 80
 
 COPY configs /etc/nginx
 COPY scripts/setup.sh /opt/nginx/
+COPY ssl-dhparams.pem /etc/letsencrypt
 
 RUN chmod +x /opt/nginx/setup.sh \
     && apk add --quiet --no-cache bash certbot certbot-nginx \

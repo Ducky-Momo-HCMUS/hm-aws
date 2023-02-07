@@ -13,7 +13,6 @@ check_env() {
 
 check_env DOMAIN
 check_env EC2_CERTBOT_DIR
-check_env EC2_CERTBOT_BACKUP_DIR
 check_env EFS_BASE_CERTBOT_DIR
 
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
@@ -30,13 +29,7 @@ ssl_dir="$EC2_CERTBOT_BACKUP_DIR/live"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 
-if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
-  echo "Certificates not found. Generating dummies for Nginx startup"
-  openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
-    -subj "/CN=localhost" \
-    -keyout "$privkey_path" \
-    -out "$fullchain_path"
-fi
+sleep 10h
 
 # certbot renewal -> changes in files -> copy all back to EFS
 # if [ -s "$certbot_fullchain_path" ] && cmp -s -- "$certbot_fullchain_path" "$fullchain_path" || \ 

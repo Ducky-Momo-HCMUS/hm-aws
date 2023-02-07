@@ -39,7 +39,10 @@ services:
       - ${EC2_CERTBOT_DIR}:${EC2_CERTBOT_DIR}
       - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
-      # - /etc/nginx:/etc/nginx
+      - ./certbot/www:/var/www/certbot:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      # For hardcoded path in nginx.conf
+      - ./certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
       - /var/log/letsencrypt:/var/log/letsencrypt
@@ -48,6 +51,7 @@ services:
       - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}
       - EC2_CERTBOT_BACKUP_DIR=${EC2_CERTBOT_BACKUP_DIR}
       - EFS_BASE_CERTBOT_DIR=${EFS_BASE_CERTBOT_DIR}
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
     depends_on:
       - account
     #   - core
@@ -56,7 +60,12 @@ services:
       context: ./certbot
       dockerfile: Dockerfile
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:rw
     environment:
       - DOMAIN=${DOMAIN}
+      - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}
+      - EC2_CERTBOT_BACKUP_DIR=${EC2_CERTBOT_BACKUP_DIR}
+      - EFS_BASE_CERTBOT_DIR=${EFS_BASE_CERTBOT_DIR}
+    depends_on:
+      - nginx
