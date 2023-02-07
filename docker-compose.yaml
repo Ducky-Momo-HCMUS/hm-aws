@@ -42,6 +42,7 @@ services:
       - /etc/nginx:/etc/nginx
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
+      - /var/log/letsencrypt:/var/log/letsencrypt
     environment:
       - DOMAIN=${DOMAIN}
       - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}
