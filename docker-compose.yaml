@@ -39,7 +39,8 @@ services:
       - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
       - ./certbot/www:/var/www/certbot:ro
-      - ./certbot/conf:${EC2_CERTBOT_DIR}:ro
+      # Need "rw" to create dummy certificates
+      - ./certbot/conf:${EC2_CERTBOT_DIR}:rw
       # For hardcoded path in nginx.conf
       - ./certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
       # For Elastic Beanstalk logging
