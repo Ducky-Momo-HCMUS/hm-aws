@@ -10,5 +10,4 @@ until [ "$( docker inspect -f {{.State.Status}} $certbot_name )"=="exited" ]; do
 done;
 
 echo "Certbot has exited. Reloading nginx"
-
-docker exec -it $nginx_name nginx -s reload
+docker exec $nginx_name nginx -s reload
