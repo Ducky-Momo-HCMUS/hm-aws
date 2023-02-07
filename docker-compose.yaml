@@ -51,3 +51,12 @@ services:
     depends_on:
       - account
     #   - core
+  certbot:
+    build:
+      context: ./certbot
+      dockerfile: Dockerfile
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+    environment:
+      - DOMAIN=${DOMAIN}
