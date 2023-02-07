@@ -2,6 +2,7 @@
 
 DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k DOMAIN)
 EFS_BASE_CERTBOT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EFS_BASE_CERTBOT_DIR)
+EC2_CERTBOT_BACKUP_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EC2_CERTBOT_BACKUP_DIR)
 EC2_CERTBOT_DIR=$(/opt/elasticbeanstalk/bin/get-config environment -k EC2_CERTBOT_DIR)
 
 # Copy directory from $1 (source) to $2 (target) if target is empty
@@ -36,4 +37,4 @@ cp_dir_if_target_is_empty "$EFS_BASE_CERTBOT_DIR/$DOMAIN" "$EC2_CERTBOT_BACKUP_D
 
 # Sync certificates to certbot directories
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
-rsync -a "$EC2_CERTBOT_BACKUP_DIR/" "$EC2_CERTBOT_DIR"
+cp_dir_if_target_is_empty "$EC2_CERTBOT_BACKUP_DIR/" "$EC2_CERTBOT_DIR"
