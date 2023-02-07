@@ -40,9 +40,9 @@ services:
       - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
       - ./certbot/www:/var/www/certbot:ro
       # Need "rw" to create dummy certificates
-      - ./certbot/conf:${EC2_CERTBOT_DIR}:rw
+      - /etc/certbot/conf:/etc/letsencrypt:rw
       # For hardcoded path in nginx.conf
-      - ./certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
+      - /etc/certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
       - /var/log/letsencrypt:/var/log/letsencrypt
@@ -60,8 +60,8 @@ services:
       context: ./certbot
       dockerfile: Dockerfile
     volumes:
-      - ./certbot/www:/var/www/certbot:rw
-      - ./certbot/conf:${EC2_CERTBOT_DIR}:rw
+      - /etc/certbot/www:/var/www/certbot:rw
+      - /etc/certbot/conf:/etc/letsencrypt:rw
     environment:
       - DOMAIN=${DOMAIN}
       - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}

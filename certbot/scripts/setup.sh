@@ -17,7 +17,6 @@ check_env EC2_CERTBOT_BACKUP_DIR
 check_env EFS_BASE_CERTBOT_DIR
 
 certbot certonly \ 
-        --non-interactive \
         --webroot \
         --webroot-path /var/www/certbot/ \
         --agree-tos \

@@ -24,9 +24,7 @@ mkdir -p "$backup_ssl_dir"
 backup_fullchain_path="$cerbot_ssl_dir/fullchain.pem"
 backup_privkey_path="$cerbot_ssl_dir/privkey.pem"
 
-# ssl_dir="$EC2_CERTBOT_DIR/live"
 ssl_dir="/etc/ssl/certbot"
-mkdir -p "$ssl_dir"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 
@@ -35,6 +33,7 @@ echo "$certbot_privkey_path"
 
 if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
   echo "Certificates not found. Generating dummies for Nginx startup"
+  mkdir -p "$ssl_dir"
   openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
     -subj "/CN=localhost" \
     -keyout "$privkey_path" \
