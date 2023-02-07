@@ -7,7 +7,7 @@ COPY ssl-dhparams.pem /etc/nginx/
 COPY scripts/setup.sh /opt/nginx/
 
 RUN chmod +x /opt/nginx/setup.sh \
-    && apk add --quiet --no-cache bash certbot certbot-nginx \
+    && apk add --quiet --no-cache bash openssl \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
