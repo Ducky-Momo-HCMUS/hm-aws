@@ -17,18 +17,20 @@ check_env EC2_CERTBOT_BACKUP_DIR
 check_env EFS_BASE_CERTBOT_DIR
 
 # https://eff-certbot.readthedocs.io/en/stable/using.html#where-are-my-certificates
-# both "ssl_dir" and "certbot_ssl_dir" should already be populated by "05_sync_with_efs.sh"
+# both "ssl_dir" and "backup_ssl_dir" should already be populated by "05_sync_with_efs.sh"
 
-cerbot_ssl_dir="$EC2_CERTBOT_DIR/live/$DOMAIN"
-certbot_fullchain_path="$cerbot_ssl_dir/fullchain.pem"
-certbot_privkey_path="$cerbot_ssl_dir/privkey.pem"
+backup_ssl_dir="$EC2_CERTBOT_BACKUP_DIR/live/$DOMAIN"
+mkdir -p "$backup_ssl_dir"
+backup_fullchain_path="$cerbot_ssl_dir/fullchain.pem"
+backup_privkey_path="$cerbot_ssl_dir/privkey.pem"
+
+ssl_dir="$EC2_CERTBOT_DIR/live"
+mkdir -p "$ssl_dir"
+fullchain_path="$ssl_dir/fullchain.pem"
+privkey_path="$ssl_dir/privkey.pem"
 
 echo "$certbot_fullchain_path"
 echo "$certbot_privkey_path"
-
-ssl_dir="$EC2_CERTBOT_BACKUP_DIR/live"
-fullchain_path="$ssl_dir/fullchain.pem"
-privkey_path="$ssl_dir/privkey.pem"
 
 if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
   echo "Certificates not found. Generating dummies for Nginx startup"
