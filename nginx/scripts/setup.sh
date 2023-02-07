@@ -21,15 +21,15 @@ check_env EFS_BASE_CERTBOT_DIR
 
 backup_ssl_dir="$EC2_CERTBOT_BACKUP_DIR/live/$DOMAIN"
 mkdir -p "$backup_ssl_dir"
-backup_fullchain_path="$cerbot_ssl_dir/fullchain.pem"
-backup_privkey_path="$cerbot_ssl_dir/privkey.pem"
+backup_fullchain_path="$backup_ssl_dir/fullchain.pem"
+backup_privkey_path="$backup_ssl_dir/privkey.pem"
 
 ssl_dir="/etc/ssl/certbot"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 
-echo "$certbot_fullchain_path"
-echo "$certbot_privkey_path"
+echo "$fullchain_path"
+echo "$privkey_path"
 
 if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
   echo "Certificates not found. Generating dummies for Nginx startup"
