@@ -16,4 +16,4 @@ check_env EC2_CERTBOT_DIR
 check_env EC2_CERTBOT_BACKUP_DIR
 check_env EFS_BASE_CERTBOT_DIR
 
-certbot certonly --webroot --webroot-path /var/www/certbot/ --agree-tos --register-unsafely-without-email --domains "${DOMAIN}"
+certbot certonly --webroot --webroot-path /var/www/certbot --agree-tos --register-unsafely-without-email --domains "${DOMAIN}"
