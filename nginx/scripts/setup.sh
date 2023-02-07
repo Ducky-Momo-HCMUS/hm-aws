@@ -29,10 +29,10 @@ ssl_dir="$EC2_CERTBOT_BACKUP_DIR/live"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 
-certbot --nginx \
-        --non-interactive \
-        --agree-tos \
-        --register-unsafely-without-email \
+certbot enhance \
+        --redirect \
+        --uir \
+        --hsts \
         --domains "$DOMAIN"
 
 sleep 10h
