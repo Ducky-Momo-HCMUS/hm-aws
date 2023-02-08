@@ -25,4 +25,6 @@
 #   echo "Done. Creating real certificates"
 # fi
 
+sleep 10s
+
 certbot certonly --agree-tos --register-unsafely-without-email --domains "${DOMAIN}" --webroot --webroot-path /var/www/certbot
