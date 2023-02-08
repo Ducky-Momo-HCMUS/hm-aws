@@ -14,7 +14,7 @@ check_env() {
 check_env DOMAIN
 
 echo "Installing ZeroSSL certificates"
-cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >>/etc/ssl/zerossl/certificate.crt
+cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >>/etc/ssl/zerossl/nginx.crt
 echo "Certificates installed"
 
 nginx -g "daemon off;"
