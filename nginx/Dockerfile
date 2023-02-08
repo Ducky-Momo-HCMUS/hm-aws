@@ -5,7 +5,7 @@ EXPOSE 80
 COPY configs /etc/nginx
 # COPY ssl-dhparams.pem /opt/certbot/
 COPY zerossl /etc/ssl/zerossl
-COPY scripts/setup.sh /opt/nginx/
+# COPY scripts/setup.sh /opt/nginx/
 
 RUN chmod +x /opt/nginx/setup.sh \
     && apk add --quiet --no-cache bash openssl \
