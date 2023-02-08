@@ -5,14 +5,14 @@ EXPOSE 80
 COPY configs /etc/nginx
 # COPY ssl-dhparams.pem /opt/certbot/
 COPY zerossl /etc/ssl/zerossl
-# COPY scripts/setup.sh /opt/nginx/
+COPY scripts/setup.sh /opt/nginx/
 
-RUN apk add --quiet --no-cache bash \
-    # && cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >> /etc/ssl/zerossl/certificate.crt \
+RUN chmod +x /opt/nginx/setup.sh \
+    && apk add --quiet --no-cache bash openssl \
     # Delete the default welcome to nginx page.
     && rm /usr/share/nginx/html/*
 
-# Start nginx in the foreground to play nicely with Docker.
-CMD ["nginx", "-g", "daemon off;"]
+# # Start nginx in the foreground to play nicely with Docker.
+# CMD ["nginx", "-g", "daemon off;"]
 
-# ENTRYPOINT ["/opt/nginx/setup.sh"]
+ENTRYPOINT ["/opt/nginx/setup.sh"]
