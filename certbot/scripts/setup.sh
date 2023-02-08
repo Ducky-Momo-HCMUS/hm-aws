@@ -25,4 +25,4 @@ if [ -d "$certbot_dir" ] && [ -n "$(ls -A "$certbot_dir")" ]; then
   echo "Done. Creating real certificates"
 fi
 
-certbot certonly --webroot --webroot-path /var/www/certbot; --agree-tos --register-unsafely-without-email --domains "${DOMAIN}"
+certbot certonly --agree-tos --register-unsafely-without-email --domains "${DOMAIN}" --webroot --webroot-path /var/www/certbot
