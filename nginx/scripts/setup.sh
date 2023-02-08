@@ -24,7 +24,7 @@ mkdir -p "$backup_ssl_dir"
 backup_fullchain_path="$backup_ssl_dir/fullchain.pem"
 backup_privkey_path="$backup_ssl_dir/privkey.pem"
 
-ssl_dir="/etc/ssl/certbot"
+ssl_dir="/etc/letsencrypt/live/$DOMAIN"
 fullchain_path="$ssl_dir/fullchain.pem"
 privkey_path="$ssl_dir/privkey.pem"
 

@@ -42,7 +42,7 @@ services:
       # Need "rw" to create dummy certificates
       - /etc/certbot/conf:/etc/letsencrypt:rw
       # For hardcoded path in nginx.conf
-      - /etc/certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
+      # - /etc/certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
       # For Elastic Beanstalk logging
       - /var/log/nginx:/var/log/nginx
     environment:
