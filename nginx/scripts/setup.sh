@@ -38,6 +38,8 @@ if [[ ! -f "$fullchain_path" ]] || [[ ! -f "$privkey_path" ]]; then
     -subj "/CN=localhost" \
     -keyout "$privkey_path" \
     -out "$fullchain_path"
+else
+  echo "Certificates already exists. Do nothing"
 fi
 
 # certbot renewal -> changes in files -> copy all back to EFS

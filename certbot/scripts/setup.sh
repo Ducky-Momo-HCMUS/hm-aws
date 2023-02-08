@@ -16,14 +16,14 @@ check_env EC2_CERTBOT_DIR
 check_env EC2_CERTBOT_BACKUP_DIR
 check_env EFS_BASE_CERTBOT_DIR
 
-certbot_dir="/etc/letsencrypt/keys"
-dummy_dir="/etc/letsencrypt/live/$DOMAIN"
+# certbot_dir="/etc/letsencrypt/archives"
+# dummy_dir="/etc/letsencrypt/live/$DOMAIN"
 
-if [ -d "$certbot_dir" ] && [ -n "$(ls -A "$certbot_dir")" ]; then
-  echo "Deleting dummy certificates for $DOMAIN"
-  rm -Rf "$dummy_dir"
-  echo "Done. Creating real certificates"
-fi
+# if [ -d "$certbot_dir" ] && [ -n "$(ls -A "$certbot_dir")" ]; then
+#   echo "Deleting dummy certificates for $DOMAIN"
+#   rm -Rf "$dummy_dir"
+#   echo "Done. Creating real certificates"
+# fi
 
 sleep 5s
 
