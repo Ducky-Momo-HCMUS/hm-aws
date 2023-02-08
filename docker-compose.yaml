@@ -14,19 +14,19 @@ services:
       - ACCOUNT_PORT=${ACCOUNT_PORT}
       - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
       - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-  # core:
-  #   image: ${DOCKER_REGISTRY}/hm-core
-  #   hostname: core
-  #   ports:
-  #     - "3020-3021:3020-3021"
-  #   environment:
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - DOMAIN=${DOMAIN}
-  #     - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
-  #     - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-  #     - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-  #     - CORE_PORT=${CORE_PORT}
-  #     - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
+  core:
+    image: ${DOCKER_REGISTRY}/hm-core
+    hostname: core
+    ports:
+      - "3020-3021:3020-3021"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - DOMAIN=${DOMAIN}
+      - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
+      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
+      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
+      - CORE_PORT=${CORE_PORT}
+      - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
   nginx:
     build:
       context: ./nginx
@@ -53,4 +53,4 @@ services:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
     depends_on:
       - account
-    #   - core
+      - core

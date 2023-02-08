@@ -19,7 +19,7 @@ if [ -f "$crt_path" ]; then
   echo "Certificates already exist"
 else
   echo "Installing ZeroSSL certificates"
-  cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >> /etc/ssl/zerossl/nginx.crt
+  cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >> $crt_path
   echo "Certificates installed"
 fi
 
