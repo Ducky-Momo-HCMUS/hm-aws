@@ -67,5 +67,5 @@ services:
       - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}
       - EC2_CERTBOT_BACKUP_DIR=${EC2_CERTBOT_BACKUP_DIR}
       - EFS_BASE_CERTBOT_DIR=${EFS_BASE_CERTBOT_DIR}
-    depends_on:
-      - nginx
+    # depends_on:
+    #   - nginx
