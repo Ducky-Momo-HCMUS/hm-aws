@@ -13,8 +13,14 @@ check_env() {
 
 check_env DOMAIN
 
-echo "Installing ZeroSSL certificates"
-cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >>/etc/ssl/zerossl/nginx.crt
-echo "Certificates installed"
+crt_path="/etc/ssl/zerossl/nginx.crt"
+
+if [ -f "$crt_path" ]; then
+  echo "Certificates already exist"
+else
+  echo "Installing ZeroSSL certificates"
+  cat /etc/ssl/zerossl/certificate.crt /etc/ssl/zerossl/ca_bundle.crt >> /etc/ssl/zerossl/nginx.crt
+  echo "Certificates installed"
+fi
 
 nginx -g "daemon off;"
