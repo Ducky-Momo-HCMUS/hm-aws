@@ -17,5 +17,5 @@ else
   echo "Changes found in certbot configuration, syncing"
   rsync -a --delete "$EC2_CERTBOT_DIR/" "$EC2_CERTBOT_BACKUP_DIR/"
   rsync -a --delete "$EC2_CERTBOT_BACKUP_DIR/" "$EFS_BASE_CERTBOT_DIR/"
-  echo "Sync to EFS complete"
+  echo "Sync to EFS completed"
 fi
