@@ -21,10 +21,10 @@ cp_dir_if_target_is_empty() {
   if [ -z "$(ls -A "$target")" ]; then
     echo "Directory $target is empty, copying from $source"
     cp -R "$source/." "$target/"
+    echo "Finished copying $source/ to $target/"
   else
     echo "Directory $target is not empty, do nothing"
   fi
-  echo "Finished copying $source/ to $target/"
 }
 
 # See https://stackoverflow.com/q/18135451 for syntax like ${DOMAIN}
