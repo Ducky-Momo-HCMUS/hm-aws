@@ -10,3 +10,4 @@ check_env() {
 check_env DOMAIN
 
 certbot --nginx --test-cert --agree-tos --register-unsafely-without-email --domains "$DOMAIN"
+

@@ -7,6 +7,9 @@ install_package() {
   echo "Finished installing $package"
 }
 
+yum update
+
 install_package amazon-efs-utils
+amazon-linux-extras install epel
 install_package certbot
 install_package certbot-nginx
