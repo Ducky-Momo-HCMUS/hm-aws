@@ -5,7 +5,7 @@ load_nginx_config() {
     config_path="$app_path/nginx/configs"
 
     # Override alias
-    \cp --verbose -r $config_path "/etc/nginx"
+    \cp --verbose -r $config_path/. "/etc/nginx/"
 }
 
 load_nginx_config
