@@ -27,30 +27,12 @@ services:
       - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
       - CORE_PORT=${CORE_PORT}
       - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
-  # nginx:
-  #   build:
-  #     context: ./nginx
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     # - ${EC2_CERTBOT_BACKUP_DIR}:${EC2_CERTBOT_BACKUP_DIR}
-  #     # - ${EFS_BASE_CERTBOT_DIR}:${EFS_BASE_CERTBOT_DIR}
-  #     # - /etc/certbot/www:/var/www/certbot:ro
-  #     # # Need "rw" to create dummy certificates
-  #     # - /etc/certbot/conf:/etc/letsencrypt:rw
-  #     # # For hardcoded path in nginx.conf
-  #     # - /etc/certbot/conf/live/${DOMAIN}:/etc/ssl/certbot
-  #     # For Elastic Beanstalk logging
-  #     - /var/log/nginx:/var/log/nginx
-  #   environment:
-  #     - DOMAIN=${DOMAIN}
-  #     - EC2_CERTBOT_DIR=${EC2_CERTBOT_DIR}
-  #     - EC2_CERTBOT_BACKUP_DIR=${EC2_CERTBOT_BACKUP_DIR}
-  #     - EFS_BASE_CERTBOT_DIR=${EFS_BASE_CERTBOT_DIR}
-  #     - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-  #   depends_on:
-  #     - account
-  #     - core
+  bff:
+    image: ${DOCKER_REGISTRY}/hm-bff
+    hostname: bff
+    ports:
+      - "5000:5000"
+    environment:
+      - ACCOUNT_BASE_URL="account:3010"
+      - CORE_BASE_URL="core:3020"
+    
