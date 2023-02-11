@@ -15,6 +15,6 @@ if [ -z "$(dir -r "$EC2_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR")" ]; then
   echo "No changes found in certbot configuration"
 else
   echo "Changes found in certbot configuration, syncing"
-  rsync -a "$EC2_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR"
-  rsync -a "$EC2_CERTBOT_BACKUP_DIR" "$EFS_BASE_CERTBOT_DIR"
+  rsync -a "$EC2_CERTBOT_DIR/" "$EC2_CERTBOT_BACKUP_DIR/"
+  rsync -a "$EC2_CERTBOT_BACKUP_DIR/" "$EFS_BASE_CERTBOT_DIR/"
 fi

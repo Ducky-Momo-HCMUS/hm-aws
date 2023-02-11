@@ -29,7 +29,7 @@ cp_dir_if_target_is_empty() {
 
 # See https://stackoverflow.com/q/18135451 for syntax like ${DOMAIN}
 # Copy certificates from EFS to a backup directory
-cp_dir_if_target_is_empty "$EFS_BASE_CERTBOT_DIR/$DOMAIN" "$EC2_CERTBOT_BACKUP_DIR"
+cp_dir_if_target_is_empty "$EFS_BASE_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR"
 # Now we should have the following if we use certbot:
 # - ${EC2_CERTBOT_BACKUP_DIR}/live/...
 # - ${EC2_CERTBOT_BACKUP_DIR}/archive/...
