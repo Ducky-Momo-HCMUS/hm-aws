@@ -16,6 +16,6 @@ if [ -z "$(dir -r "$EC2_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR")" ]; then
 else
   echo "Changes found in certbot configuration, syncing"
   rsync -a --delete "$EC2_CERTBOT_DIR/" "$EC2_CERTBOT_BACKUP_DIR/"
-  rsync -a --delete "$EC2_CERTBOT_BACKUP_DIR/" "$EFS_BASE_CERTBOT_DIR/"
+  rsync -a --delete "$EC2_CERTBOT_BACKUP_DIR/" "$EFS_BASE_CERTBOT_DIR/$DOMAIN/"
   echo "Sync to EFS completed"
 fi
