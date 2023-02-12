@@ -2,37 +2,26 @@ version: "3"
 
 services:
   account:
-    image: ${DOCKER_REGISTRY}/hm-account
-    hostname: account
+    image: ${DOCKER_REGISTRY}/hm-services
+    hostname: services
     ports:
-      - "3010-3011:3010-3011"
+      - "3000:3000"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - PORT=3000
       - DOMAIN=${DOMAIN}
+      - DATABASE_URL=${DATABASE_URL}
+      - EMAIL_SERVICE=${EMAIL_SERVICE}
+      - EMAIL=${EMAIL}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
       - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
-      - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
-      - ACCOUNT_PORT=${ACCOUNT_PORT}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-  core:
-    image: ${DOCKER_REGISTRY}/hm-core
-    hostname: core
-    ports:
-      - "3020-3021:3020-3021"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DOMAIN=${DOMAIN}
       - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
-      - ACCOUNT_PRIVATE_PORT=${ACCOUNT_PRIVATE_PORT}
-      - ACCOUNT_PRIVATE_HOST=${ACCOUNT_PRIVATE_HOST}
-      - CORE_PORT=${CORE_PORT}
-      - CORE_PRIVATE_PORT=${CORE_PRIVATE_PORT}
+      - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
+      - ACCOUNT_RESET_PASSWORD_LINK=${ACCOUNT_RESET_PASSWORD_LINK}
   bff:
     image: ${DOCKER_REGISTRY}/hm-bff
     hostname: bff
     ports:
       - "5000:5000"
     environment:
-      - ACCOUNT_BASE_URL="account:3010"
-      - CORE_BASE_URL="core:3020"
+      - SERVICES_BASE_URL="services:3000"
     
