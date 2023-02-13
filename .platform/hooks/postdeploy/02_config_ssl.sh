@@ -11,7 +11,7 @@ check_env DOMAIN
 
 certbot --nginx --reinstall --agree-tos --register-unsafely-without-email --domains "$DOMAIN"
 
-if [ -z "$(dir -r "$EC2_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR")" ]; then
+if [ -z "$(diff --brief -r "$EC2_CERTBOT_DIR" "$EC2_CERTBOT_BACKUP_DIR")" ]; then
   echo "No changes found in certbot configuration"
 else
   echo "Changes found in certbot configuration, syncing"
