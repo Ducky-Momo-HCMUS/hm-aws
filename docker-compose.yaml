@@ -19,6 +19,8 @@ services:
       - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
       - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
       - ACCOUNT_RESET_PASSWORD_LINK=${ACCOUNT_RESET_PASSWORD_LINK}
+      # Match 06_load_parameter_store.sh
+      - SECRET_DIR=/etc/hm-secrets
   bff:
     image: ${DOCKER_REGISTRY}/hm-bff
     hostname: bff

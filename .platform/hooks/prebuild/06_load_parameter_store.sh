@@ -14,5 +14,6 @@ load_parameter() {
   echo "Saved $key to $target"
 }
 
+mkdir -p $OUT_DIR
 load_parameter "hm-auth-priv-key" "private.key"
 load_parameter "hm-auth-pub-key" "public.pem"
