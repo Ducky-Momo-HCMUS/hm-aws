@@ -61,3 +61,10 @@ Environment variables:
 - `DOCKER_REGISTRY`
 - `DOMAIN`
 - `EFS_FILE_SYSTEM_ID`
+
+## Permissions
+
+Some extra permissions are required:
+
+- [AmazonEC2ContainerRegistryReadOnly](https://docs.aws.amazon.com/AmazonECR/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AmazonEC2ContainerRegistryReadOnly): Allow EB to pull images from ECR.
+- [AmazonSSMReadOnlyAccess](https://docs.aws.amazon.com/systems-manager/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AmazonSSMReadOnlyAccess): Load secrets from parameter store.
