@@ -19,8 +19,7 @@ services:
       - ACCOUNT_JWT_PRIVATE=${ACCOUNT_JWT_PRIVATE}
       - ACCOUNT_JWT_PUBLIC=${ACCOUNT_JWT_PUBLIC}
       - ACCOUNT_JWT_SECRET=${ACCOUNT_JWT_SECRET}
-      - RESET_PASSWORD_BASE_URL=${RESET_PASSWORD_BASE_URL}
-      - FE_BASE_URL_TEACHER=${FE_BASE_URL_TEACHER}
+      - CLIENT_URL=${CLIENT_URL}
       # Match 06_load_parameter_store.sh
       - SECRET_DIR=/etc/hm-secrets
   bff:
