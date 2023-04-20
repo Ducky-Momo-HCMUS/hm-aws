@@ -1,11 +1,15 @@
+# HM-AWS
+
+Elastic beanstalk deployment config for Homeroom management. Other services such as *hm-service* and *hm-web* will pull this repository and perform deployment on CircleCI.
+
 ## Stack
 
 ### Elastic Beanstalk with Docker Compose
 
 The Docker platform (Amazon Linux 2) with Docker Compose doesn't setup NGINX (see [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-specific.html#command-options-docker)) so we have to setup our own, either:
 
-1. Config and enable NGINX manually on host machine. We can also install [certbot](https://certbot.eff.org) for automatic SSL configuration.
-2. Use [NGINX image](https://hub.docker.com/_/nginx). **_(current approach)_**
+1. Config and enable NGINX manually on host machine. We can also install [certbot](https://certbot.eff.org) for automatic SSL configuration. **_(current approach)_**
+2. Use [NGINX image](https://hub.docker.com/_/nginx).
 
 We packed all services and BFF into one instance environment to reduce cost to a minimum. A real production scenario should have each service in a separate environment (and behind a load balancer, too).
 
@@ -25,17 +29,13 @@ Serve as reverse proxy server for the backend services, it also do SSL terminati
 
 The `nginx.conf` is copied from Elastic Beanstalk template to enable health checking and logging.
 
-### ZeroSSL
+### Parameter Store
 
-Initially, SSL certificates for NGINX are generated using certbot. But we cannot utilize EC2 to store certificates because it is a disposable platform. A workaround is to setup S3 backup using shell scripts or mount an EFS.
-
-Another alternative is ZeroSSL.
-
-### CircleCI
+Store secret files such as private key use for signing JWT token
 
 ## Configuration
 
-Important checklist for EB, based on [AWS console](https://ap-southeast-1.console.aws.amazon.com/elasticbeanstalk/home). Options not listed here are set as default or are not important to the application.
+Important checklist for EB, based on [AWS console](https://ap-southeast-1.console.aws.amazon.com/elasticbeanstalk/home). Options aren't listed here are set as default or are not important to the application.
 
 - Software
   - Container options
@@ -50,7 +50,7 @@ Important checklist for EB, based on [AWS console](https://ap-southeast-1.consol
   - Virtual machine permissions
     - EC2 key pair: For debug purposes. Allow you to tunnel to EC2 instance
 - Network: Add your prefered "Instance subnets" and "Database subnets"
-- Database: TODO
+- Database: You should use a separate database on RDS and connect it with environment properties
 
 ## Secrets
 
@@ -68,3 +68,18 @@ Some extra permissions are required:
 
 - [AmazonEC2ContainerRegistryReadOnly](https://docs.aws.amazon.com/AmazonECR/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AmazonEC2ContainerRegistryReadOnly): Allow EB to pull images from ECR.
 - [AmazonSSMReadOnlyAccess](https://docs.aws.amazon.com/systems-manager/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AmazonSSMReadOnlyAccess): Load secrets from parameter store.
+
+## Deployment
+
+Assume that: 
+
+1. Elastic Beanstalk is set up and running (for example the EB name will be "hm-env")
+2. You have deployed *hm-service* and apps/server in *hm-web* to ECR or DockerHub
+
+When you execute `eb deploy hm-env`, the following will happen on Elastic Beanstalk:
+
+1. Push *hm-aws* to S3
+2. Pull from S3 to EC2
+3. Execute scripts in *.platform/hooks/prebuild*
+4. Execute `docker-compose.yaml`
+5. Execute scripts in *.platform/hooks/postdeploy*
